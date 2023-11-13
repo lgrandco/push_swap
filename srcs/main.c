@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 00:42:44 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/13 09:08:37 by legrandc         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:07:13 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,17 @@ void	add_begin(t_stack *stack, t_node *new_node)
 
 void	stack_pop(t_stack *stack)
 {
-	stack->first = stack->first->next;
-	stack->last->next = stack->first;
+	if (stack->last == stack->first)
+	{
+		stack->last = NULL;
+		stack->first = NULL;
+	}
+	else
+	{
+		stack->first = stack->first->next;
+		stack->first->prev = stack->last;
+		stack->last->next = stack->first;
+	}
 }
 
 void	push(t_stack *a, t_stack *b)
@@ -63,6 +72,10 @@ void	push(t_stack *a, t_stack *b)
 	first = a->first;
 	stack_pop(a);
 	add_begin(b, first);
+}
+
+void	rotate(t_stack *stack)
+{
 }
 
 t_node *new (int n)
@@ -107,21 +120,22 @@ int	main(int ac, char **av)
 		printf("%d\n", node->n);
 		node = node->next;
 	}
+	l2 = 5;
 	push(&stack, &stack2);
 	push(&stack, &stack2);
 	push(&stack2, &stack);
 	push(&stack2, &stack);
 	node = stack2.first;
-	while (l2--)
+	while (l2-- && node)
 	{
 		printf("2:%d\n", node->n);
 		node = node->next;
 	}
-	l1 = 1;
+	l1 = 10;
 	node = stack.first;
-	while (l1--)
+	while (l1-- && node)
 	{
-		printf("%d\n", node->n);
+		printf("1:%d\n", node->n);
 		node = node->next;
 	}
 }
