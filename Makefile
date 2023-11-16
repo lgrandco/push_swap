@@ -2,7 +2,7 @@ NAME = push_swap
 
 SRC_PATH = srcs
 
-SRC = main.c
+SRC = main.c actions.c stacks_ops.c
 
 SRC := $(addprefix $(SRC_PATH)/,$(SRC))
 

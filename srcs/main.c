@@ -6,152 +6,25 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 00:42:44 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/16 13:44:17 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/17 00:31:54 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	aff_(t_stack *stack1)
-{
-	size_t	i;
-	t_node	*node;
+// void	aff_(t_stack *stack1)
+// {
+// 	size_t	i;
+// 	t_node	*node;
 
-	i = 0;
-	node = stack1->first;
-	while (i++ < stack1->len)
-	{
-		printf("%d\n", node->n);
-		node = node->next;
-	}
-}
-
-void	add_after(t_node *node, t_node *new)
-{
-	new->next = node->next;
-	new->prev = node;
-	node->next->prev = new;
-	node->next = new;
-}
-
-void	add_end(t_stack *stack, t_node *new_node)
-{
-	if (stack->last)
-		add_after(stack->last, new_node);
-	else
-	{
-		new_node->prev = new_node;
-		new_node->next = new_node;
-		stack->first = new_node;
-	}
-	stack->last = new_node;
-}
-void	add_before(t_node *node, t_node *new)
-{
-	new->prev = node->prev;
-	new->next = node;
-	node->prev->next = new;
-	node->prev = new;
-}
-void	add_begin(t_stack *stack, t_node *new_node)
-{
-	if (stack->first)
-		add_before(stack->first, new_node);
-	else
-	{
-		new_node->prev = new_node;
-		new_node->next = new_node;
-		stack->last = new_node;
-	}
-	stack->first = new_node;
-}
-
-void	stack_pop(t_stack *stack)
-{
-	if (stack->last == stack->first)
-	{
-		ft_bzero(stack, sizeof(*stack));
-	}
-	else
-	{
-		stack->first = stack->first->next;
-		stack->first->prev = stack->last;
-		stack->last->next = stack->first;
-	}
-}
-
-void	push(t_stack *a, t_stack *b, char *s)
-{
-	t_node	*first;
-
-	a->len--;
-	b->len++;
-	first = a->first;
-	stack_pop(a);
-	add_begin(b, first);
-	ft_putstr_fd(s, 1);
-}
-
-void	rotate(t_stack *stack, char *s)
-{
-	stack->last = stack->first;
-	stack->first = stack->first->next;
-	ft_putstr_fd(s, 1);
-}
-
-void	rrotate(t_stack *stack, char *s)
-{
-	stack->first = stack->last;
-	stack->last = stack->last->prev;
-	ft_putstr_fd(s, 1);
-}
-
-void	rr_rotate(t_stack *stack1, t_stack *stack2)
-{
-	rotate(stack1, "rr\n");
-	rotate(stack2, "");
-}
-
-void	rrr_rotate(t_stack *stack1, t_stack *stack2)
-{
-	rrotate(stack1, "rrr\n");
-	rrotate(stack2, "");
-}
-
-void	swap(t_node *a, t_node *b)
-{
-	int	tmp;
-
-	tmp = a->n;
-	a->n = b->n;
-	b->n = tmp;
-}
-
-void	sort_three(t_stack *stack)
-{
-	if (stack->first->n > stack->first->next->n
-		&& stack->first->n > stack->last->n)
-		rotate(stack, "ra\n");
-	else if (stack->first->next->n > stack->first->n
-		&& stack->first->next->n > stack->last->n)
-		rrotate(stack, "rra\n");
-	if (stack->first->n > stack->first->next->n)
-	{
-		swap(stack->first, stack->first->next);
-		ft_putstr_fd("sa\n", 1);
-	}
-}
-
-t_node *new (int n)
-{
-	t_node	*ret;
-
-	ret = calloc(1, sizeof(*ret));
-	if (!ret)
-		return (NULL);
-	ret->n = n;
-	return (ret);
-}
+// 	i = 0;
+// 	node = stack1->first;
+// 	while (i++ < stack1->len)
+// 	{
+// 		printf("%d\n", node->n);
+// 		node = node->next;
+// 	}
+// }
 
 t_node	*get_min(t_stack *stack)
 {
@@ -301,10 +174,33 @@ void	push_back(t_stack *stack1, t_stack *stack2)
 	while (cheapest->rrb--)
 		rrotate(stack2, "rrb\n");
 	while (cheapest->rrr--)
-		rrr_rotate(stack1, stack2);
+	{
+		rrotate(stack1, "rrr\n");
+		rrotate(stack2, "");
+	}
 	while (cheapest->rr--)
-		rr_rotate(stack1, stack2);
+	{
+		rotate(stack1, "rr\n");
+		rotate(stack2, "");
+	}
 	push(stack2, stack1, "pa\n");
+}
+
+int	is_sorted(t_stack *stack)
+{
+	size_t	i;
+	t_node	*node;
+
+	i = 0;
+	node = stack->first;
+	while (i + 1 < stack->len)
+	{
+		if (node->n > node->next->n)
+			return (0);
+		node = node->next;
+		i++;
+	}
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -326,14 +222,13 @@ int	main(int ac, char **av)
 		stack1.len++;
 	}
 	node = stack1.first;
-	while (stack1.len > 3)
+	while (stack1.len > 3 && !is_sorted(&stack1))
 		push(&stack1, &stack2, "pb\n");
-	sort_three(&stack1);
-	// aff_(&stack2);
+	if (!is_sorted(&stack1))
+		sort_three(&stack1);
 	while (stack2.len > 0)
 		push_back(&stack1, &stack2);
 	get_min(&stack1);
-	// printf("pos:%zd\n", stack1.min_pos);
 	if (stack1.min_pos <= stack1.len / 2)
 		while (stack1.min_pos--)
 			rotate(&stack1, "ra\n");

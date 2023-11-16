@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:09:13 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/16 05:39:41 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/17 00:23:05 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,16 @@ typedef struct s_stack
 	size_t			min_pos;
 	size_t			len;
 }					t_stack;
+
+/* FUNCTIONS */
+t_node *new (int n);
+void				sort_three(t_stack *stack);
+void				push(t_stack *src, t_stack *dst, char *s);
+void				swap(t_node *a, t_node *b);
+void				rrotate(t_stack *stack, char *s);
+void				rotate(t_stack *stack, char *s);
+void				stack_pop(t_stack *stack);
+void				add_begin(t_stack *stack, t_node *new_node);
+void				add_end(t_stack *stack, t_node *new_node);
 
 #endif
