@@ -2,7 +2,7 @@ NAME = push_swap
 
 SRC_PATH = srcs
 
-SRC = main.c actions.c stacks_ops.c
+SRC = main.c actions.c stacks_ops.c costs.c
 
 SRC := $(addprefix $(SRC_PATH)/,$(SRC))
 
@@ -23,7 +23,7 @@ all : $(NAME)
 $(LIBFT) :
 	make bonus -C $(LIBFT_PATH)
 
-$(NAME) : $(LIBFT) ${OBJ}
+$(NAME) : $(LIBFT) ${OBJ} push_swap.h
 	${CC} -o ${NAME} ${OBJ} ${LIBFT}
 
 bonus : $(NAME)

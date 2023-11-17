@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:06:40 by leo               #+#    #+#             */
-/*   Updated: 2023/11/17 00:21:44 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/17 03:58:47 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	stack_pop(t_stack *stack)
 	}
 }
 
-t_node *new (int n)
+t_node	*create_node(int n)
 {
 	t_node	*ret;
 
@@ -68,5 +68,29 @@ t_node *new (int n)
 	if (!ret)
 		return (NULL);
 	ret->n = n;
+	return (ret);
+}
+
+t_node	*get_min(t_stack *stack)
+{
+	long int	max;
+	t_node		*node;
+	t_node		*ret;
+	size_t		i;
+
+	i = 0;
+	max = LONG_MAX;
+	node = stack->first;
+	while (i < stack->len)
+	{
+		if (node->n < max)
+		{
+			stack->min_pos = i;
+			max = node->n;
+			ret = node;
+		}
+		i++;
+		node = node->next;
+	}
 	return (ret);
 }
