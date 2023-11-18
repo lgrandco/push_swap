@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:58:30 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/18 02:21:05 by legrandc         ###   ########.fr       */
+/*   Updated: 2023/11/18 23:29:48 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_node	*create_node(char *s, t_stack *stack)
 	if (!ret)
 		return (NULL);
 	ret->n = n;
+	stack->average += ((n - stack->average) / (int)(stack->len + 1));
 	return (ret);
 }
 

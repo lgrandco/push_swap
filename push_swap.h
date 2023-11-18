@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:09:13 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/18 00:56:52 by legrandc         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:02:48 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_stack
 	t_node			*last;
 	size_t			min_pos;
 	size_t			len;
+	int				average;
 }					t_stack;
 
 /* FUNCTIONS */

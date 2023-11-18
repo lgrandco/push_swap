@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 00:42:44 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/18 02:52:23 by legrandc         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:45:48 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	parse_params(char **av, t_stack *stack1, int ac)
 
 int	main(int ac, char **av)
 {
-	static t_stack	stack1;
-	static t_stack	stack2;
+	static t_stack	stack1 = {0};
+	static t_stack	stack2 = {0};
 
 	if (ac == 2)
 		av = ft_split(av[1], ' ');

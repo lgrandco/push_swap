@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 20:54:23 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/18 00:57:48 by legrandc         ###   ########.fr       */
+/*   Updated: 2023/11/18 23:42:31 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,17 @@ void	push_back(t_stack *stack_a, t_stack *stack_b)
 
 void	push_swap(t_stack *stack1, t_stack *stack2)
 {
+	size_t	i;
+
+	i = 0;
+	while (i++ < stack1->len + stack2->len && stack1->len > 50
+		&& stack1->len > stack2->len)
+	{
+		if (stack1->first->n <= stack1->average + 1)
+			push(stack1, stack2, "pb\n");
+		else
+			rotate(stack1, "ra\n");
+	}
 	while (stack1->len > 3 && !is_sorted(stack1))
 		push(stack1, stack2, "pb\n");
 	sort_three(stack1);
