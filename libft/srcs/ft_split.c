@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:21:56 by leo               #+#    #+#             */
-/*   Updated: 2023/11/07 04:32:28 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/18 01:37:11 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ size_t	ft_countwords(const char *s, char c)
 
 void	free_matrix(char **t)
 {
-	while (*t)
-		free(*t++);
+	size_t	i;
+
+	i = 0;
+	while (t[i])
+		free(t[i++]);
 	free(t);
 }
 

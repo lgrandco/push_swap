@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stacks_ops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:06:40 by leo               #+#    #+#             */
-/*   Updated: 2023/11/17 03:58:47 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/17 18:56:56 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	add_end(t_stack *stack, t_node *new_node)
 		new_node->next = new_node;
 		stack->first = new_node;
 	}
+	stack->len++;
 	stack->last = new_node;
 }
 
@@ -45,11 +46,13 @@ void	add_begin(t_stack *stack, t_node *new_node)
 		new_node->next = new_node;
 		stack->last = new_node;
 	}
+	stack->len++;
 	stack->first = new_node;
 }
 
 void	stack_pop(t_stack *stack)
 {
+	stack->len--;
 	if (stack->last == stack->first)
 		ft_bzero(stack, sizeof(*stack));
 	else
@@ -58,17 +61,6 @@ void	stack_pop(t_stack *stack)
 		stack->first->prev = stack->last;
 		stack->last->next = stack->first;
 	}
-}
-
-t_node	*create_node(int n)
-{
-	t_node	*ret;
-
-	ret = calloc(1, sizeof(*ret));
-	if (!ret)
-		return (NULL);
-	ret->n = n;
-	return (ret);
 }
 
 t_node	*get_min(t_stack *stack)

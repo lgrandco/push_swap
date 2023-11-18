@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:12:42 by leo               #+#    #+#             */
-/*   Updated: 2023/11/17 04:07:18 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/17 18:51:13 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	push(t_stack *src, t_stack *dst, char *s)
 {
 	t_node	*first;
 
-	src->len--;
-	dst->len++;
 	first = src->first;
 	stack_pop(src);
 	add_begin(dst, first);

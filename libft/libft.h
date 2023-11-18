@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:55:36 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/09 09:11:34 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/18 01:17:53 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_list
 }					t_list;
 
 /* FUNCTIONS */
+void				free_matrix(char **t);
 unsigned int		ft_abs(int n);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);

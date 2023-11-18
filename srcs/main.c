@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 00:42:44 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/17 04:07:25 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/18 02:52:23 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,105 +26,51 @@
 // 	}
 // }
 
-t_node	*get_cheapest(t_stack *stack)
+void	free_error(t_stack *stack)
 {
-	long	max;
-	t_node	*node;
-	size_t	i;
-	t_node	*ret;
+	free_stack(stack);
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
+}
 
-	max = LONG_MAX;
-	node = stack->first;
+void	parse_params(char **av, t_stack *stack1, int ac)
+{
+	size_t	i;
+	t_node	*new_node;
+
 	i = 0;
-	while (i < stack->len)
+	while (av[i])
 	{
-		if (node->total_cost < max)
+		new_node = create_node((av[i++]), stack1);
+		if (!new_node)
 		{
-			max = node->total_cost;
-			ret = node;
+			if (ac == 2)
+				free_matrix(av);
+			free_error(stack1);
 		}
-		node = node->next;
-		i++;
+		add_end(stack1, new_node);
 	}
-	return (ret);
-}
-
-void	push_back(t_stack *stack_a, t_stack *stack_b)
-{
-	t_node	*cheapest;
-
-	set_costs(stack_a, stack_b);
-	cheapest = get_cheapest(stack_b);
-	while (cheapest->ra--)
-		rotate(stack_a, "ra\n");
-	while (cheapest->rb--)
-		rotate(stack_b, "rb\n");
-	while (cheapest->rra--)
-		rrotate(stack_a, "rra\n");
-	while (cheapest->rrb--)
-		rrotate(stack_b, "rrb\n");
-	while (cheapest->rrr--)
-	{
-		rrotate(stack_a, "rrr\n");
-		rrotate(stack_b, "");
-	}
-	while (cheapest->rr--)
-	{
-		rotate(stack_a, "rr\n");
-		rotate(stack_b, "");
-	}
-	push(stack_b, stack_a, "pa\n");
-}
-
-int	is_sorted(t_stack *stack)
-{
-	size_t	i;
-	t_node	*node;
-
-	i = 0;
-	node = stack->first;
-	while (i + 1 < stack->len)
-	{
-		if (node->n > node->next->n)
-			return (0);
-		node = node->next;
-		i++;
-	}
-	return (1);
 }
 
 int	main(int ac, char **av)
 {
-	size_t			i;
-	t_node			*node;
-	t_node			*new_node;
 	static t_stack	stack1;
 	static t_stack	stack2;
 
-	(void)ac;
-	i = 1;
-	while (av[i])
-	{
-		new_node = create_node(ft_atoi(av[i++]));
-		if (!new_node)
-			return (-1);
-		add_end(&stack1, new_node);
-		stack1.len++;
-	}
-	node = stack1.first;
-	while (stack1.len > 3 && !is_sorted(&stack1))
-		push(&stack1, &stack2, "pb\n");
-	if (!is_sorted(&stack1))
-		sort_three(&stack1);
-	while (stack2.len > 0)
-		push_back(&stack1, &stack2);
-	get_min(&stack1);
-	if (stack1.min_pos <= stack1.len / 2)
-		while (stack1.min_pos--)
-			rotate(&stack1, "ra\n");
+	if (ac == 2)
+		av = ft_split(av[1], ' ');
 	else
-		while (stack1.min_pos++ != stack1.len)
-			rrotate(&stack1, "rra\n");
-	// aff_(&stack1);
-	return (1);
+		++av;
+	if (!av || !*av)
+	{
+		if (ac == 2)
+			free(av);
+		return (0);
+	}
+	parse_params(av, &stack1, ac);
+	if (ac == 2)
+		free_matrix(av);
+	push_swap(&stack1, &stack2);
+	free_stack(&stack1);
+	return (0);
 }

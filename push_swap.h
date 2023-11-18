@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:09:13 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/17 04:07:32 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/18 00:56:52 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ typedef struct s_stack
 }					t_stack;
 
 /* FUNCTIONS */
+void				push_swap(t_stack *stack1, t_stack *stack2);
+int					is_sorted(t_stack *stack);
+void				free_stack(t_stack *stack);
+t_node				*create_node(char *s, t_stack *stack);
 void				set_costs(t_stack *targets, t_stack *stack);
 t_node				*get_min(t_stack *stack);
-t_node				*create_node(int n);
 void				sort_three(t_stack *stack);
 void				push(t_stack *src, t_stack *dst, char *s);
 void				swap(t_node *a, t_node *b);
