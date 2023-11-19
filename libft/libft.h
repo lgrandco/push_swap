@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:55:36 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/18 01:17:53 by legrandc         ###   ########.fr       */
+/*   Updated: 2023/11/19 06:00:06 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "get_next_line_bonus.h"
 # include <bsd/string.h>
 # include <limits.h>
 # include <stdarg.h>
@@ -35,6 +36,7 @@ typedef struct s_list
 }					t_list;
 
 /* FUNCTIONS */
+char				*get_next_line(int fd);
 void				free_matrix(char **t);
 unsigned int		ft_abs(int n);
 int					ft_max(int a, int b);
@@ -88,5 +90,49 @@ size_t				ft_strlen(const char *s);
 int					ft_atoi(const char *nptr);
 void				ft_bzero(void *s, size_t n);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
+
+// printf
+
+# define FLAGS "-0# +"
+typedef struct s_struct
+{
+	int				dash;
+	int				zero;
+	int				space;
+	int				plus;
+	int				star;
+	size_t			width;
+	int				dot;
+	int				precision;
+	va_list			ap;
+	char			*string;
+	int				len;
+	int				percent;
+	char			specifier;
+	int				is_nul;
+	int				is_pos;
+	int				is_neg;
+	int				hex_low;
+	int				hex_up;
+	int				is_str;
+	int				hash;
+}					t_struct;
+/* FUNCTIONS */
+int					pad(t_struct *vars);
+int					handle_string(char *s, t_struct *vars);
+int					handle_ptr(size_t ptr, t_struct *vars);
+int					handle_int(int n, t_struct *vars);
+int					handle_unsigned(unsigned int n, t_struct *vars, char *base);
+int					ft_printf(const char *s, ...);
+void				init(t_struct *vars);
+void				setflag(char c, t_struct *vars);
+
+# define ANSI_COLOR_RED "\x1b[31m"
+# define ANSI_COLOR_GREEN "\x1b[32m"
+# define ANSI_COLOR_YELLOW "\x1b[33m"
+# define ANSI_COLOR_BLUE "\x1b[34m"
+# define ANSI_COLOR_MAGENTA "\x1b[35m"
+# define ANSI_COLOR_CYAN "\x1b[36m"
+# define ANSI_COLOR_RESET "\x1b[0m"
 
 #endif

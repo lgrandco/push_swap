@@ -48,6 +48,11 @@ SRC =	ft_atoi.c \
 	ft_abs.c \
 	ft_min.c \
 	ft_max.c \
+	get_next_line.c \
+	handler.c \
+	pad.c \
+	printf_utils.c \
+	ft_printf.c
 
 BONUS_SRC =	ft_lstnew.c \
 		ft_lstadd_front.c \
@@ -69,13 +74,12 @@ BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
 all: ${NAME}
 
-$(NAME): ${OBJ} $(BONUS_OBJ)
+$(NAME): ${OBJ} $(BONUS_OBJ) Makefile libft.h
 	ar rc ${NAME} ${OBJ} $(BONUS_OBJ)
 
 bonus: ${NAME}
 
 clean:
-	echo test
 	${RM} ${OBJ} ${BONUS_OBJ}
 
 

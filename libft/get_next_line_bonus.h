@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 00:42:44 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/19 06:02:11 by leo              ###   ########.fr       */
+/*   Created: 2023/11/09 19:51:59 by legrandc          #+#    #+#             */
+/*   Updated: 2023/11/19 01:37:59 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-int	main(int ac, char **av)
+# include <stdlib.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+# define FD 512
+
+typedef struct s_string
 {
-	static t_stack	stack1 = {0};
-	static t_stack	stack2 = {0};
+	char	*content;
+	size_t	len;
+	size_t	max_size;
+}			t_string;
 
-	if (ac == 2)
-		av = ft_split(av[1], ' ');
-	else
-		++av;
-	if (!av || !*av)
-	{
-		if (ac == 2)
-			free(av);
-		return (0);
-	}
-	parse_params(av, &stack1, ac);
-	if (ac == 2)
-		free_matrix(av);
-	push_swap(&stack1, &stack2);
-	free_stack(&stack1);
-	return (0);
-}
+/* FUNCTIONS */
+char		*get_next_line(int fd);
+
+#endif

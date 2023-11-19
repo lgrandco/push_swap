@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:06:40 by leo               #+#    #+#             */
-/*   Updated: 2023/11/18 22:23:15 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/19 06:35:03 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	stack_pop(t_stack *stack)
 {
 	stack->len--;
 	if (stack->last == stack->first)
-		ft_bzero(stack, sizeof(*stack));
+	{
+		stack->first = NULL;
+		stack->last = NULL;
+	}
 	else
 	{
 		stack->first = stack->first->next;
@@ -85,4 +88,30 @@ t_node	*get_min(t_stack *stack)
 		node = node->next;
 	}
 	return (ret);
+}
+
+void	aff_stacks(t_stack *stack1, t_stack *stack2)
+{
+	t_node	*node1;
+	t_node	*node2;
+
+	node1 = stack1->first;
+	node2 = stack2->first;
+	while (node1 || node2)
+	{
+		if (node1 && ft_printf("%-20d", node1->n))
+			node1 = node1->next;
+		else
+			ft_printf("%-20s", "");
+		if (node2 && ft_printf("%-20d", node2->n))
+			node2 = node2->next;
+		if (node1 == stack1->first)
+			node1 = NULL;
+		if (node2 == stack2->first)
+			node2 = NULL;
+		ft_printf("\n");
+	}
+	ft_printf("%-20c%c\n%-20c%-20c%u moves\n", '-', '-', 'a', 'b',
+		stack1->moves);
+	ft_printf("%s\n", ft_memset((char[61]){0}, '-', 60));
 }
