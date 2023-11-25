@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:55:36 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/19 06:00:06 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/25 03:05:27 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define HEX_UP "0123456789ABCDEF"
 # define HEX_LOW "0123456789abcdef"
 # define DEC "0123456789"
+# define FLAGS "-0# +"
 
 typedef struct s_list
 {
@@ -93,7 +94,6 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
 // printf
 
-# define FLAGS "-0# +"
 typedef struct s_struct
 {
 	int				dash;
@@ -134,5 +134,6 @@ void				setflag(char c, t_struct *vars);
 # define ANSI_COLOR_MAGENTA "\x1b[35m"
 # define ANSI_COLOR_CYAN "\x1b[36m"
 # define ANSI_COLOR_RESET "\x1b[0m"
+# define ANSI_BOLD "\x1b[1m"
 
 #endif

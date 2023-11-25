@@ -57,7 +57,7 @@ int	get_spec(t_struct *vars)
 	else if (vars->specifier == '%' && ++vars->percent)
 		vars->string = ft_strdup("%");
 	else if (vars->specifier == 'c')
-		vars->string = ft_strdup((char[]){va_arg(vars->ap, int), 0});
+		vars->string = ft_strdup((char []){va_arg(vars->ap, int), 0});
 	if (!vars->string)
 		return (-1);
 	vars->len = 1;

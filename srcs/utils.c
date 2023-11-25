@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:58:30 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/19 02:11:38 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/25 02:54:31 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	free_stack(t_stack *stack)
 	t_node	*next;
 
 	i = 0;
+	if (!stack)
+		return ;
 	node = stack->first;
 	while (i++ < stack->len)
 	{

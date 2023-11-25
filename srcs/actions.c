@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:12:42 by leo               #+#    #+#             */
-/*   Updated: 2023/11/17 18:51:13 by legrandc         ###   ########.fr       */
+/*   Updated: 2023/11/25 02:11:23 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	rotate(t_stack *stack, char *s)
 {
+	if (!stack->first)
+		return ;
 	stack->last = stack->first;
 	stack->first = stack->first->next;
 	ft_putstr_fd(s, 1);
@@ -21,6 +23,8 @@ void	rotate(t_stack *stack, char *s)
 
 void	rrotate(t_stack *stack, char *s)
 {
+	if (!stack->first)
+		return ;
 	stack->first = stack->last;
 	stack->last = stack->last->prev;
 	ft_putstr_fd(s, 1);
@@ -39,6 +43,8 @@ void	push(t_stack *src, t_stack *dst, char *s)
 {
 	t_node	*first;
 
+	if (src->first == NULL)
+		return ;
 	first = src->first;
 	stack_pop(src);
 	add_begin(dst, first);

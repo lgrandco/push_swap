@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 01:25:02 by leo               #+#    #+#             */
-/*   Updated: 2023/11/19 06:12:20 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/25 03:03:00 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static int	is_valid(char *s)
 static void	exec_command(t_stack *stack1, t_stack *stack2, char *command)
 {
 	if (!is_valid(command))
-		free_error(stack1);
+	{
+		free(command);
+		free_error(stack1, stack2, "Error\n");
+	}
 	if (!ft_strncmp(command, "ra\n", 4) || !ft_strncmp(command, "rr\n", 4))
 		rotate(stack1, "");
 	if (!ft_strncmp(command, "rb\n", 4) || !ft_strncmp(command, "rr\n", 4))
@@ -42,11 +45,8 @@ static void	exec_command(t_stack *stack1, t_stack *stack2, char *command)
 		push(stack2, stack1, "");
 	if (!ft_strncmp(command, "pb\n", 4))
 		push(stack1, stack2, "");
-	free(command);
 	stack1->moves++;
 }
-
-#include <fcntl.h>
 
 static void	exec_commands(t_stack *stack1, t_stack *stack2)
 {
@@ -56,6 +56,7 @@ static void	exec_commands(t_stack *stack1, t_stack *stack2)
 	while (command)
 	{
 		exec_command(stack1, stack2, command);
+		free(command);
 		aff_stacks(stack1, stack2);
 		command = get_next_line(0);
 	}
@@ -82,8 +83,10 @@ int	main(int ac, char **av)
 	aff_stacks(&stack1, &stack2);
 	exec_commands(&stack1, &stack2);
 	if (!is_sorted(&stack1) || stack2.len)
-		free_error(&stack1);
+		ft_printf(ANSI_COLOR_RED "KO\n" ANSI_COLOR_RESET);
+	else
+		ft_printf(ANSI_COLOR_GREEN "OK\n" ANSI_COLOR_RESET);
 	free_stack(&stack1);
-	ft_printf(ANSI_COLOR_GREEN "OK\n`9");
-	return (0);
+	free_stack(&stack2);
+	return (EXIT_SUCCESS);
 }

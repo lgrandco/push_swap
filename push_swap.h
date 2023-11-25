@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:09:13 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/19 06:11:50 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/25 02:10:00 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_stack
 
 /* FUNCTIONS */
 void				aff_stacks(t_stack *stack1, t_stack *stack2);
-void				free_error(t_stack *stack);
+void				free_error(t_stack *stack1, t_stack *stack2, char *s);
 void				parse_params(char **av, t_stack *stack1, int ac);
 void				push_swap(t_stack *stack1, t_stack *stack2);
 int					is_sorted(t_stack *stack);

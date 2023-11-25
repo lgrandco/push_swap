@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:06:40 by leo               #+#    #+#             */
-/*   Updated: 2023/11/19 06:35:03 by leo              ###   ########.fr       */
+/*   Updated: 2023/11/25 02:50:09 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	add_begin(t_stack *stack, t_node *new_node)
 
 void	stack_pop(t_stack *stack)
 {
-	stack->len--;
 	if (stack->last == stack->first)
 	{
 		stack->first = NULL;
@@ -64,6 +63,7 @@ void	stack_pop(t_stack *stack)
 		stack->first->prev = stack->last;
 		stack->last->next = stack->first;
 	}
+	stack->len--;
 }
 
 t_node	*get_min(t_stack *stack)
@@ -99,10 +99,10 @@ void	aff_stacks(t_stack *stack1, t_stack *stack2)
 	node2 = stack2->first;
 	while (node1 || node2)
 	{
-		if (node1 && ft_printf("%-20d", node1->n))
+		if (node1 && ft_printf(ANSI_COLOR_YELLOW "%-20d", node1->n))
 			node1 = node1->next;
 		else
-			ft_printf("%-20s", "");
+			ft_printf(ANSI_COLOR_YELLOW "%-20s", "");
 		if (node2 && ft_printf("%-20d", node2->n))
 			node2 = node2->next;
 		if (node1 == stack1->first)
@@ -111,7 +111,8 @@ void	aff_stacks(t_stack *stack1, t_stack *stack2)
 			node2 = NULL;
 		ft_printf("\n");
 	}
-	ft_printf("%-20c%c\n%-20c%-20c%u moves\n", '-', '-', 'a', 'b',
+	ft_printf("%-20c%c\n%-20c%-20c%s%u moves\n", '-', '-', 'a', 'b', ANSI_BOLD,
 		stack1->moves);
-	ft_printf("%s\n", ft_memset((char[61]){0}, '-', 60));
+	ft_printf(ANSI_COLOR_BLUE "%s\n%s", ft_memset((char [61]){0}, '-', 60),
+		ANSI_COLOR_RESET);
 }
