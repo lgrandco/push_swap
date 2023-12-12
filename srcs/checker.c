@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 01:25:02 by leo               #+#    #+#             */
-/*   Updated: 2023/11/25 03:03:00 by leo              ###   ########.fr       */
+/*   Updated: 2023/12/12 15:46:10 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	exec_command(t_stack *stack1, t_stack *stack2, char *command)
 	if (!ft_strncmp(command, "rrb\n", 4) || !ft_strncmp(command, "rrr\n", 4))
 		rrotate(stack2, "");
 	if (!ft_strncmp(command, "sa\n", 4) || !ft_strncmp(command, "ss\n", 4))
-		swap(stack1->first, stack1->first->next);
+		swap(stack1);
 	if (!ft_strncmp(command, "sb\n", 4) || !ft_strncmp(command, "ss\n", 4))
-		swap(stack1->first, stack1->first->next);
+		swap(stack2);
 	if (!ft_strncmp(command, "pa\n", 4))
 		push(stack2, stack1, "");
 	if (!ft_strncmp(command, "pb\n", 4))

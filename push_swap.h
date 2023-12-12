@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:09:13 by legrandc          #+#    #+#             */
-/*   Updated: 2023/11/25 02:10:00 by leo              ###   ########.fr       */
+/*   Updated: 2023/12/12 15:47:36 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				set_costs(t_stack *targets, t_stack *stack);
 t_node				*get_min(t_stack *stack);
 void				sort_three(t_stack *stack);
 void				push(t_stack *src, t_stack *dst, char *s);
-void				swap(t_node *a, t_node *b);
+void				swap(t_stack *stack);
 void				rrotate(t_stack *stack, char *s);
 void				rotate(t_stack *stack, char *s);
 void				stack_pop(t_stack *stack);

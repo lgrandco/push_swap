@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:12:42 by leo               #+#    #+#             */
-/*   Updated: 2023/11/25 02:11:23 by leo              ###   ########.fr       */
+/*   Updated: 2023/12/12 15:49:00 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ void	rrotate(t_stack *stack, char *s)
 	ft_putstr_fd(s, 1);
 }
 
-void	swap(t_node *a, t_node *b)
+void	swap(t_stack *stack)
 {
 	int	tmp;
 
-	tmp = a->n;
-	a->n = b->n;
-	b->n = tmp;
+	if (!stack->first)
+		return ;
+	tmp = stack->first->n;
+	stack->first->n = stack->first->next->n;
+	stack->first->next->n = tmp;
 }
 
 void	push(t_stack *src, t_stack *dst, char *s)
@@ -61,7 +63,7 @@ void	sort_three(t_stack *stack)
 		rrotate(stack, "rra\n");
 	if (stack->first->n > stack->first->next->n)
 	{
-		swap(stack->first, stack->first->next);
+		swap(stack);
 		ft_putstr_fd("sa\n", 1);
 	}
 }
